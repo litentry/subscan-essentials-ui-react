@@ -42,7 +42,7 @@
     "clsx": "1.2.1",
     "dayjs": "1.11.9",
     "framer-motion": "^12.7.3",
-    "next": "^14.2.3",
+    "next": "14.2.35",
     "next-runtime-env": "1.7.3",
     "nprogress": "^0.2.0",
     "postcss": "8.4.21",
