@@ -7,24 +7,40 @@ const Footer: React.FC = () => {
     <footer className="py-4 sm:py-6 md:py-8 mt-auto">
       <div className="container mx-auto px-4 sm:px-0">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-7">
+          <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
             <div className="flex items-center text-xs sm:text-sm gap-1">
               <span className="text-[#97959D]">Funded by</span>
               <Image alt="polakdot" src="/images/polakdot.png" width={16} height={16} className="" />
               <span>Polkadot Treasury</span>
             </div>
-            <span className="flex items-center text-xs sm:text-sm gap-1">
-              <span className="text-[#97959D]">Developed by </span>
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs sm:justify-start sm:text-sm">
+              <span className="text-[#97959D]">Powered by</span>
+              <span>Subscan Essentials</span>
+              <Link className="text-black underline underline-offset-2" href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener noreferrer">
+                GPL-3.0
+              </Link>
+              <span className="text-[#97959D]">Source Code</span>
+              <Link className="text-black underline underline-offset-2" href="https://github.com/litentry/subscan-essentials-ui-react" target="_blank" rel="noopener noreferrer">
+                UI
+              </Link>
+              <Link className="text-black underline underline-offset-2" href="https://github.com/litentry/subscan-essentials" target="_blank" rel="noopener noreferrer">
+                API
+              </Link>
+            </div>
+            <span className="flex flex-wrap items-center justify-center gap-1 text-xs sm:justify-start sm:text-sm">
+              <span className="text-[#97959D]">Subscan attribution:</span>
               <Image alt="subscan" src="/images/subscan.png" width={16} height={16} className="" />
               <span>Subscan Team</span>
+              <span className="text-[#97959D]">This is a self-hosted Heima explorer, not an official Subscan-hosted service.</span>
             </span>
           </div>
 
           <div className="flex items-center space-x-4 mt-3 md:mt-0">
             <Link
               className="text-black"
-              href="https://github.com/subscan-explorer/subscan-essentials-ui-react"
+              href="https://github.com/litentry/subscan-essentials-ui-react"
               target="_blank"
+              aria-label="Source Code"
               rel="noopener noreferrer">
               <div className="transition-colors hover:text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="sm:w-[24px] sm:h-[24px]">

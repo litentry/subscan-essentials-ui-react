@@ -51,10 +51,9 @@ describe('Navbar', () => {
     )
   }
 
-  it('renders the logo', () => {
+  it('renders the Heima brand', () => {
     renderNavbar()
-    const logo = screen.getByAltText('subscan')
-    expect(logo).toBeInTheDocument()
+    expect(screen.getByText('Heima Explorer')).toBeInTheDocument()
   })
 
   it('handles search with enter key', () => {

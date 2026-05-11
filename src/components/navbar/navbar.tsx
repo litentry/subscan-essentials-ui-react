@@ -193,8 +193,10 @@ const Component: React.FC<Props> = ({ children, className }) => {
         }}>
         <NavbarBrand>
           <Link href="/" className="text-inherit">
-            <Image className="rounded-none" alt="subscan" src="/images/logo.png" width={202} height={25} />
-            {/* <div className='text-white ml-2'>{metadata?.networkNode}</div> */}
+            <div className="flex items-center gap-2 text-white">
+              <span className="text-xl font-semibold tracking-normal">Heima Explorer</span>
+              <span className="hidden rounded-md bg-white/20 px-2 py-0.5 text-xs font-medium sm:inline">Powered by Subscan Essentials</span>
+            </div>
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="end">

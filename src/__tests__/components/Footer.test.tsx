@@ -20,14 +20,18 @@ describe('Footer', () => {
     expect(screen.getByAltText('subscan')).toBeInTheDocument()
   })
   
-  it('renders social links', () => {
+  it('renders attribution and source links', () => {
     render(<Footer />)
     
     const links = screen.getAllByRole('link')
     const hrefs = links.map(link => link.getAttribute('href'))
     
-    // Check for GitHub link
-    expect(hrefs).toContain('https://github.com/subscan-explorer/subscan-essentials-ui-react')
+    expect(screen.getByText('Powered by')).toBeInTheDocument()
+    expect(screen.getByText('Subscan Essentials')).toBeInTheDocument()
+    expect(screen.getByText(/not an official Subscan-hosted service/i)).toBeInTheDocument()
+    expect(hrefs).toContain('https://github.com/litentry/subscan-essentials-ui-react')
+    expect(hrefs).toContain('https://github.com/litentry/subscan-essentials')
+    expect(hrefs).toContain('https://www.gnu.org/licenses/gpl-3.0.en.html')
     
     // Check for Twitter link
     expect(hrefs).toContain('https://twitter.com/subscan_io')
