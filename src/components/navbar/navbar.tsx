@@ -221,7 +221,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                 <DropdownMenu
                   aria-label="Substrate"
                   itemClasses={{
-                    base: 'gap-4',
+                    base: 'gap-4 text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10',
                   }}>
                   <DropdownItem key="block">
                     <Link href="/sub/block" className="block text-inherit">
@@ -267,7 +267,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                 <DropdownMenu
                   aria-label="Substrate"
                   itemClasses={{
-                    base: 'gap-4',
+                    base: 'gap-4 text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10',
                   }}>
                   <DropdownItem key="block">
                     <Link href="/block" className="block text-inherit">
@@ -412,7 +412,9 @@ const Component: React.FC<Props> = ({ children, className }) => {
                     base: 'w-auto',
                     trigger: '!bg-transparent shadow-none !w-auto px-5',
                     innerWrapper: '!w-auto',
-                    popoverContent: 'w-[190px]',
+                    value: 'text-[#171819]',
+                    listbox: 'text-white',
+                    popoverContent: 'heima-select-popover w-[190px]',
                     selectorIcon: 'right-[0px]',
                   }}
                   label=""
@@ -423,7 +425,9 @@ const Component: React.FC<Props> = ({ children, className }) => {
                     }
                   }}>
                   {typeOptions.map((item) => (
-                    <SelectItem key={item.value}>{item.name}</SelectItem>
+                    <SelectItem key={item.value} className="text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10">
+                      {item.name}
+                    </SelectItem>
                   ))}
                 </Select>
                 <Divider orientation="vertical" className="mx-4" />

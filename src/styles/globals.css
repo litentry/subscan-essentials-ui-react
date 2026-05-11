@@ -157,6 +157,35 @@ html body {
   color: #ececec;
 }
 
+.heima-select-popover,
+[data-slot="popover"] .heima-select-popover {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 20, 21, 0.98) !important;
+  color: #ececec;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(16px);
+}
+
+.heima-select-popover [data-slot="listbox"],
+.heima-select-popover [role="listbox"] {
+  color: #ececec;
+}
+
+.heima-select-popover [data-slot="base"] {
+  color: #ececec;
+}
+
+.heima-select-popover [data-slot="base"][data-hover="true"],
+.heima-select-popover [data-slot="base"][data-focus="true"],
+.heima-select-popover [data-slot="base"][aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.heima-select-popover [data-slot="selectedIcon"] {
+  color: #9cf982;
+}
+
 input[type=number] { 
   -moz-appearance: textfield;
   appearance: textfield;
