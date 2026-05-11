@@ -33,10 +33,10 @@ describe('Footer', () => {
     expect(hrefs).toContain('https://github.com/litentry/subscan-essentials')
     expect(hrefs).toContain('https://www.gnu.org/licenses/gpl-3.0.en.html')
     
-    // Check for Twitter link
-    expect(hrefs).toContain('https://twitter.com/subscan_io')
+    // Check for X link
+    expect(hrefs).toContain('https://x.com/heimaNetwork')
     
     // Check for Email link
-    expect(hrefs).toContain('mailto:hello@subscan.io')
+    expect(hrefs).toContain('mailto:support@heima.network')
   })
 })
