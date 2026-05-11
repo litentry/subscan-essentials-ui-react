@@ -13,11 +13,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ item }) => {
   const fromLink = `/address/${item.from_address}`
   const toLink = `/address/${item.to_address}`
 
-  const bgColor = 'bg-white'
-  const hoverBgColor = 'hover:shadow-md'
-
   return (
-    <div className={`${bgColor} ${hoverBgColor} p-3 sm:p-4 rounded-lg mb-2 sm:mb-4 transition-shadow`}>
+    <div className="heima-item p-3 sm:p-4 rounded-lg mb-2 sm:mb-4 transition-all">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
         <div className="mb-1 sm:mb-0">
           <div className="flex items-center">

@@ -22,8 +22,8 @@ export default function Page({}: InferGetServerSidePropsType<typeof getServerSid
   return (
     <PageContent>
       {isLoading ? (
-        <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
-          <Spinner size="lg" />
+        <div className="fixed inset-0 flex items-center justify-center bg-[#101214] z-50">
+          <Spinner size="lg" color="primary" />
         </div>
       ) : (
         <Container className="">

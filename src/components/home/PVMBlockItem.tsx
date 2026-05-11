@@ -11,11 +11,8 @@ const PVMBlockItem: React.FC<PVMBlockItemProps> = ({ item }) => {
   const baseUrl = 'pvm/'
   const linkHref = `/block/${item.block_num}`
 
-  const bgColor = 'bg-white'
-  const hoverBgColor = 'hover:shadow-md'
-
   return (
-    <div className={`${bgColor} ${hoverBgColor} p-3 sm:p-4 rounded-lg mb-2 sm:mb-4 transition-shadow`}>
+    <div className="heima-item p-3 sm:p-4 rounded-lg mb-2 sm:mb-4 transition-all">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
         <div>
           <div className="flex items-center">

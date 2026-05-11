@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
       <div className={`grid grid-cols-1 gap-4 sm:gap-6 ${columns === 2 ? 'lg:grid-cols-2' : ''}`}>
         {metadata.enable_substrate && (
           <div>
-            <div className="bg-secondary/10 rounded-lg p-3 sm:p-5 mb-4 sm:mb-5">
+            <div className="heima-panel rounded-lg p-3 sm:p-5 mb-4 sm:mb-5">
               <div className="mb-3 sm:mb-4 text-base sm:text-lg font-semibold">Substrate</div>
               <div className={`grid gap-4 mb-4 ${columns === 2 ? 'grid-cols-2' : 'grid-cols-4'}`}>
                 <InfoCard title="Substrate Block" value={formatNumber(metadata.finalized_blockNum)} href="/sub/block" color="text-secondary" />
@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
 
         {metadata.enable_evm && (
           <div>
-            <div className="bg-blue-50 rounded-lg p-3 sm:p-5 mb-4 sm:mb-5">
+            <div className="heima-panel rounded-lg p-3 sm:p-5 mb-4 sm:mb-5">
               <div className="mb-3 sm:mb-4 text-base sm:text-lg font-semibold">Smart Contract</div>
               <div className={`grid gap-4 mb-4 ${columns === 2 ? 'grid-cols-2' : 'grid-cols-4'}`}>
                 <InfoCard title="Smart Contract Block" value={formatNumber(metadata.finalized_blockNum)} href="/block" />
