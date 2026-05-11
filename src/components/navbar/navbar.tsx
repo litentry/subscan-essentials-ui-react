@@ -204,7 +204,10 @@ const Component: React.FC<Props> = ({ children, className }) => {
         <NavbarContent className="hidden sm:flex gap-4" justify="end">
           {showSubstrate && showPVM && (
             <>
-              <Dropdown>
+              <Dropdown
+                classNames={{
+                  content: 'border border-white/10 !bg-[#121415] text-white shadow-[0_18px_48px_rgba(0,0,0,0.38)]',
+                }}>
                 <NavbarItem>
                   <DropdownTrigger>
                     <Button
@@ -222,6 +225,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                   aria-label="Substrate"
                   itemClasses={{
                     base: 'gap-4 text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10',
+                    title: 'text-white',
                   }}>
                   <DropdownItem key="block">
                     <Link href="/sub/block" className="block text-inherit">
@@ -250,7 +254,10 @@ const Component: React.FC<Props> = ({ children, className }) => {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-              <Dropdown>
+              <Dropdown
+                classNames={{
+                  content: 'border border-white/10 !bg-[#121415] text-white shadow-[0_18px_48px_rgba(0,0,0,0.38)]',
+                }}>
                 <NavbarItem>
                   <DropdownTrigger>
                     <Button
@@ -268,6 +275,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                   aria-label="Substrate"
                   itemClasses={{
                     base: 'gap-4 text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10',
+                    title: 'text-white',
                   }}>
                   <DropdownItem key="block">
                     <Link href="/block" className="block text-inherit">
@@ -413,9 +421,21 @@ const Component: React.FC<Props> = ({ children, className }) => {
                     trigger: '!bg-transparent shadow-none !w-auto px-5',
                     innerWrapper: '!w-auto',
                     value: 'text-[#171819]',
-                    listbox: 'text-white',
-                    popoverContent: 'heima-select-popover w-[190px]',
+                    listbox: 'text-white bg-transparent',
                     selectorIcon: 'right-[0px]',
+                  }}
+                  popoverProps={{
+                    classNames: {
+                      content:
+                        'heima-select-popover w-[190px] border border-white/10 !bg-[#121415] !text-white shadow-[0_18px_48px_rgba(0,0,0,0.38)]',
+                    },
+                  }}
+                  listboxProps={{
+                    itemClasses: {
+                      base: '!text-white data-[hover=true]:!text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:!text-white data-[selectable=true]:focus:bg-white/10 data-[selected=true]:!text-white data-[selected=true]:bg-white/10',
+                      title: 'text-white',
+                      selectedIcon: 'text-[#9CF982]',
+                    },
                   }}
                   label=""
                   selectedKeys={type}
@@ -425,9 +445,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                     }
                   }}>
                   {typeOptions.map((item) => (
-                    <SelectItem key={item.value} className="text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:bg-white/10">
-                      {item.name}
-                    </SelectItem>
+                    <SelectItem key={item.value}>{item.name}</SelectItem>
                   ))}
                 </Select>
                 <Divider orientation="vertical" className="mx-4" />
