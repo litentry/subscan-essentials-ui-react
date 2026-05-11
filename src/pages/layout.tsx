@@ -27,6 +27,8 @@ export default function RootLayout({
     <div id="app" className={`font-sans flex min-h-screen flex-col`}>
       <Head>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"></meta>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <script src="/__ENV.js" />
       </Head>
       <Providers>
