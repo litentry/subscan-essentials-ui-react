@@ -16,7 +16,7 @@ html body {
   -webkit-tap-highlight-color: transparent;
   line-height: inherit;
   background: #101214;
-  color: #171819;
+  color: #ececec;
 }
 
 .heima-shell {
@@ -65,6 +65,95 @@ html body {
 
 .heima-panel .text-black,
 .heima-item .text-black {
+  color: #ececec;
+}
+
+.heima-shell .bg-content1,
+.heima-shell [data-slot="base"].bg-content1 {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(23, 24, 25, 0.96) 0%, rgba(12, 14, 15, 0.96) 100%);
+  color: #ececec;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+
+.heima-shell [data-slot="wrapper"]:has(table) {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(23, 24, 25, 0.96) 0%, rgba(12, 14, 15, 0.96) 100%) !important;
+  color: #ececec;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+
+.heima-shell table {
+  color: #ececec;
+}
+
+.heima-shell thead tr,
+.heima-shell [data-slot="th"],
+.heima-shell .bg-default-100 {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+.heima-shell [data-slot="tr"] {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heima-shell [data-slot="td"],
+.heima-shell td {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.heima-shell [data-slot="empty-wrapper"],
+.heima-shell [data-slot="loading-wrapper"] {
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.heima-shell .text-content1-foreground,
+.heima-shell .text-foreground {
+  color: #ececec;
+}
+
+.heima-shell .text-default-500,
+.heima-shell .text-default-600,
+.heima-shell .text-gray-500,
+.heima-shell .text-zinc-500 {
+  color: rgba(255, 255, 255, 0.64) !important;
+}
+
+.heima-shell a,
+.heima-shell .text-primary {
+  color: #50d2c1;
+}
+
+.heima-shell a:hover {
+  color: #9cf982;
+}
+
+.heima-shell [data-slot="tabList"] {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.heima-shell [data-slot="tab"] {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.heima-shell [data-selected="true"][data-slot="tab"] {
+  color: #ececec;
+}
+
+.heima-shell [data-slot="cursor"] {
+  background: #12c6c5;
+}
+
+.heima-shell [data-slot="separator"] {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.heima-shell [data-slot="prev"],
+.heima-shell [data-slot="next"],
+.heima-shell [data-slot="item"] {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
   color: #ececec;
 }
 
