@@ -1,1 +1,1 @@
-window.__ENV = {"NEXT_PUBLIC_API_HOST":"https://test-scan.heima.network"};
+window.__ENV = {"NEXT_PUBLIC_API_HOST":"https://explorer.heima.network"};

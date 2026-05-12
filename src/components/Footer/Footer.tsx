@@ -8,11 +8,6 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-0">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
           <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
-            <div className="flex items-center text-xs sm:text-sm gap-1">
-              <span className="text-white/60">Funded by</span>
-              <Image alt="polakdot" src="/images/polakdot.png" width={16} height={16} className="" />
-              <span>Polkadot Treasury</span>
-            </div>
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs sm:justify-start sm:text-sm">
               <span className="text-white/60">Powered by</span>
               <span>Subscan Essentials</span>
