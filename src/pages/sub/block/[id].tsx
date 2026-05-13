@@ -12,14 +12,18 @@ import { LoadingSpinner, LoadingText } from '@/components/loading'
 
 export default function Page() {
   const router = useRouter()
-  const id = router.query.id
+  const id = router.query.id as string
+  if (!id) {
+    return <LoadingText />
+  }
   const blockNum = Number(id)
-  if (isNaN(blockNum)) {
+  const isBlockHash = typeof id === 'string' && id.startsWith('0x') && id.length === 66
+  if (!isBlockHash && isNaN(blockNum)) {
     return <LoadingText />
   }
   const NEXT_PUBLIC_API_HOST = env('NEXT_PUBLIC_API_HOST') || ''
   const { data, isLoading } = useBlock(NEXT_PUBLIC_API_HOST, {
-    block_num: blockNum,
+    ...(isBlockHash ? { block_hash: id } : { block_num: blockNum }),
   })
 
   const blockData = unwrap(data)
