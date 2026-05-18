@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useData } from '@/context'
+import { env } from 'next-runtime-env'
 
 const MainContainer = ({ children }: { children: React.ReactNode }) => {
   const { metadata } = useData()
@@ -23,9 +24,12 @@ export default function RootLayout({
   children: React.ReactNode
   pageProps: AppProps
 }) {
+  const explorerName = env('NEXT_PUBLIC_EXPLORER_NAME') || 'Heima Explorer'
+
   return (
     <div id="app" className={`font-sans flex min-h-screen flex-col`}>
       <Head>
+        <title>{explorerName}</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"></meta>
         <link rel="icon" href="/favicon.ico?v=heima-20260511" type="image/x-icon" sizes="16x16" />
         <link rel="shortcut icon" href="/favicon.ico?v=heima-20260511" type="image/x-icon" />

@@ -21,6 +21,7 @@ import {
 import { useData } from '@/context'
 import Image from 'next/image'
 import _ from 'lodash'
+import { env } from 'next-runtime-env'
 
 interface Props extends BareProps {
   value: string
@@ -64,6 +65,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
   const showSubstrate = metadata?.enable_substrate
   const showPVM = metadata?.enable_evm
   const networkNode = metadata?.networkNode || 'heima'
+  const explorerName = env('NEXT_PUBLIC_EXPLORER_NAME') || 'Heima Explorer'
   const networkLogoSrc = networkNode === 'heima' ? '/images/network/heima/logo.svg' : `/images/network/${networkNode}/logo.png`
 
   const icons = {
@@ -196,7 +198,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
         <NavbarBrand>
           <Link href="/" className="text-inherit">
             <div className="flex items-center gap-2 text-white">
-              <span className="text-xl font-semibold tracking-normal">Heima Explorer</span>
+              <span className="text-xl font-semibold tracking-normal">{explorerName}</span>
               <span className="hidden rounded-md border border-white/15 bg-white/10 px-2 py-0.5 text-xs font-medium text-[#AEFEC3] sm:inline">Powered by Subscan Essentials</span>
             </div>
           </Link>
