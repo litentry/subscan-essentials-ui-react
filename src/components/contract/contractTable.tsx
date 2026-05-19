@@ -9,6 +9,7 @@ import { Link } from '../link'
 import { CursorPagination } from '../cursorPagination'
 import { env } from 'next-runtime-env'
 import { getThemeColor } from '@/utils/text'
+import { formatContractVerifyStatus } from '@/utils/contract'
 
 interface Props extends BareProps {
   args?: getPVMContractListParams
@@ -44,14 +45,7 @@ const Component: React.FC<Props> = ({ children, className, args }) => {
   return (
     <Table
       aria-label="Table"
-      bottomContent={
-        <CursorPagination
-          pagination={pagination}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-          color={getThemeColor()}
-        />
-      }
+      bottomContent={<CursorPagination pagination={pagination} onPrevious={handlePrevious} onNext={handleNext} color={getThemeColor()} />}
       classNames={{
         wrapper: 'min-h-[222px]',
         td: 'h-[50px]',
@@ -73,7 +67,7 @@ const Component: React.FC<Props> = ({ children, className, args }) => {
                   </TableCell>
                 )
               } else if (columnKey === 'verify_status') {
-                return <TableCell>{item.verify_status === 'verified' ? 'Verified' : 'Unverified'}</TableCell>
+                return <TableCell>{formatContractVerifyStatus(item.verify_status)}</TableCell>
               }
               return <TableCell>{getKeyValue(item, columnKey)}</TableCell>
             }}

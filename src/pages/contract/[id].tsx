@@ -12,6 +12,7 @@ import { Link } from '@/components/link'
 import { ContractInfo, ContractVerify } from '@/components/contract'
 import { env } from 'next-runtime-env'
 import { LoadingSpinner, LoadingText } from '@/components/loading'
+import { hasDisplayableContractInfo } from '@/utils/contract'
 
 export default function Page() {
   const router = useRouter()
@@ -31,6 +32,7 @@ export default function Page() {
   const accountListData = unwrap(accountsData)
   const accountData = accountListData?.list?.[0]
   const contractData = unwrap(data)
+  const showContractInfo = hasDisplayableContractInfo(contractData)
 
   return (
     <PageContent>
@@ -79,11 +81,7 @@ export default function Page() {
                   <CardBody>
                     <Tabs aria-label="tabs" variant="underlined" color={getThemeColor()}>
                       <Tab key="contract" title="Contract">
-                        {contractData.verify_status === 'verified' ? (
-                          <ContractInfo contract={contractData}></ContractInfo>
-                        ) : (
-                          <ContractVerify address={id} />
-                        )}
+                        {showContractInfo ? <ContractInfo contract={contractData}></ContractInfo> : <ContractVerify address={id} />}
                       </Tab>
                       <Tab key="transactions" title="Transactions">
                         <TxTable
