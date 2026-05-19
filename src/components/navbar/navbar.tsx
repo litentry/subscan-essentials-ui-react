@@ -93,19 +93,19 @@ const Component: React.FC<Props> = ({ children, className }) => {
     ]
     const pvmOptions = [
       {
-        name: 'Smart Contract Block',
+        name: 'EVM Contract Block',
         value: 'pvm_block',
       },
       {
-        name: 'Smart Contract Transaction',
+        name: 'EVM Contract Transaction',
         value: 'pvm_tx',
       },
       {
-        name: 'Smart Contract',
+        name: 'EVM Contract',
         value: 'pvm_contract',
       },
       {
-        name: 'Smart Contract Account',
+        name: 'EVM Account',
         value: 'pvm_account',
       },
     ]
@@ -269,7 +269,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
                       radius="sm"
                       variant="light"
                       endContent={icons.chevron}>
-                      Smart Contract
+                      EVM
                     </Button>
                   </DropdownTrigger>
                 </NavbarItem>
@@ -424,18 +424,20 @@ const Component: React.FC<Props> = ({ children, className }) => {
                     innerWrapper: '!w-auto',
                     value: 'text-[#171819]',
                     listbox: 'text-white bg-transparent',
+                    listboxWrapper: 'max-h-none overflow-visible',
                     selectorIcon: 'right-[0px]',
                   }}
                   popoverProps={{
                     classNames: {
                       content:
-                        'heima-select-popover w-[190px] border border-white/10 !bg-[#121415] !text-white shadow-[0_18px_48px_rgba(0,0,0,0.38)]',
+                        'heima-select-popover min-w-[280px] w-max max-h-none border border-white/10 !bg-[#121415] !text-white shadow-[0_18px_48px_rgba(0,0,0,0.38)]',
                     },
                   }}
                   listboxProps={{
+                    className: 'max-h-none overflow-visible',
                     itemClasses: {
-                      base: '!text-white data-[hover=true]:!text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:!text-white data-[selectable=true]:focus:bg-white/10 data-[selected=true]:!text-white data-[selected=true]:bg-white/10',
-                      title: 'text-white',
+                      base: 'min-w-[260px] !text-white data-[hover=true]:!text-white data-[hover=true]:bg-white/10 data-[selectable=true]:focus:!text-white data-[selectable=true]:focus:bg-white/10 data-[selected=true]:!text-white data-[selected=true]:bg-white/10',
+                      title: 'text-white whitespace-nowrap overflow-visible text-clip',
                       selectedIcon: 'text-[#9CF982]',
                     },
                   }}
