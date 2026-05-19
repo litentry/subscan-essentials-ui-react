@@ -26,6 +26,81 @@ import { env } from 'next-runtime-env'
 interface Props extends BareProps {
   value: string
 }
+
+export type SearchType = 'sub_block' | 'sub_extrinsic' | 'sub_event' | 'sub_account' | 'pvm_block' | 'pvm_tx' | 'pvm_account' | 'pvm_contract'
+
+type SearchOption = {
+  name: string
+  value: SearchType
+}
+
+const SUBSTRATE_SEARCH_OPTIONS: SearchOption[] = [
+  {
+    name: 'Substrate Block',
+    value: 'sub_block',
+  },
+  {
+    name: 'Substrate Extrinsic',
+    value: 'sub_extrinsic',
+  },
+  {
+    name: 'Substrate Event',
+    value: 'sub_event',
+  },
+  {
+    name: 'Substrate Account',
+    value: 'sub_account',
+  },
+]
+
+const EVM_SEARCH_OPTIONS: SearchOption[] = [
+  {
+    name: 'EVM Contract Block',
+    value: 'pvm_block',
+  },
+  {
+    name: 'EVM Contract Transaction',
+    value: 'pvm_tx',
+  },
+  {
+    name: 'EVM Account',
+    value: 'pvm_account',
+  },
+  {
+    name: 'EVM Contract',
+    value: 'pvm_contract',
+  },
+]
+
+export const getSearchRedirectPath = (searchType: SearchType | undefined, rawValue: string) => {
+  const searchValue = rawValue.trim()
+
+  if (!searchValue) {
+    return null
+  }
+
+  switch (searchType) {
+    case 'sub_block':
+      return `/sub/block/${searchValue}`
+    case 'sub_extrinsic':
+      return `/sub/extrinsic/${searchValue}`
+    case 'sub_event':
+      return `/sub/event/${searchValue}`
+    case 'sub_account':
+      return `/sub/account/${searchValue}`
+    case 'pvm_block':
+      return `/block/${searchValue}`
+    case 'pvm_tx':
+      return `/tx/${searchValue}`
+    case 'pvm_account':
+      return `/address/${searchValue}`
+    case 'pvm_contract':
+      return `/contract/${searchValue}`
+    default:
+      return null
+  }
+}
+
 const ChevronDown = ({ fill, size, ...props }: { fill?: string; size?: number | string } & React.SVGProps<SVGSVGElement>) => {
   return (
     <svg fill="none" height={size || 24} viewBox="0 0 24 24" width={size || 24} xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -59,7 +134,7 @@ const SearchIcon = ({ size = 24, strokeWidth = 1.5, ...props }) => {
 const Component: React.FC<Props> = ({ children, className }) => {
   const { metadata, token } = useData()
   const [value, setValue] = useState('')
-  const [type, setType] = useState<string[]>(['sub_block'])
+  const [type, setType] = useState<SearchType[]>(['sub_block'])
   const router = useRouter()
 
   const showSubstrate = metadata?.enable_substrate
@@ -73,45 +148,9 @@ const Component: React.FC<Props> = ({ children, className }) => {
     search: <SearchIcon fill="none" size={16} />,
   }
   const typeOptions = useMemo(() => {
-    const subOptions = [
-      {
-        name: 'Substrate Block',
-        value: 'sub_block',
-      },
-      {
-        name: 'Substrate Extrinsic',
-        value: 'sub_extrinsic',
-      },
-      {
-        name: 'Substrate Event',
-        value: 'sub_event',
-      },
-      {
-        name: 'Substrate Account',
-        value: 'sub_account',
-      },
-    ]
-    const pvmOptions = [
-      {
-        name: 'EVM Contract Block',
-        value: 'pvm_block',
-      },
-      {
-        name: 'EVM Contract Transaction',
-        value: 'pvm_tx',
-      },
-      {
-        name: 'EVM Contract',
-        value: 'pvm_contract',
-      },
-      {
-        name: 'EVM Account',
-        value: 'pvm_account',
-      },
-    ]
-    let options: any[] = []
+    let options: SearchOption[] = []
     if (metadata?.enable_substrate) {
-      _.forEach(subOptions, (item) => {
+      _.forEach(SUBSTRATE_SEARCH_OPTIONS, (item) => {
         options.push({
           name: item.name,
           value: item.value,
@@ -119,7 +158,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
       })
     }
     if (metadata?.enable_evm) {
-      _.forEach(pvmOptions, (item) => {
+      _.forEach(EVM_SEARCH_OPTIONS, (item) => {
         options.push({
           name: item.name,
           value: item.value,
@@ -128,6 +167,9 @@ const Component: React.FC<Props> = ({ children, className }) => {
     }
     return options
   }, [metadata?.enable_substrate, metadata?.enable_evm])
+  const selectedTypeKeys = useMemo(() => {
+    return typeOptions.some((item) => item.value === type[0]) ? type : []
+  }, [type, typeOptions])
 
   const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -135,35 +177,10 @@ const Component: React.FC<Props> = ({ children, className }) => {
     }
   }
   const handleRedirect = () => {
-    if (value.trim()) {
-      switch (type[0]) {
-        case 'sub_block':
-          router.push(`/sub/block/${value.trim()}`)
-          break
-        case 'sub_extrinsic':
-          router.push(`/sub/extrinsic/${value.trim()}`)
-          break
-        case 'sub_event':
-          router.push(`/sub/event/${value.trim()}`)
-          break
-        case 'sub_account':
-          router.push(`/sub/account/${value.trim()}`)
-          break
-        case 'pvm_block':
-          router.push(`/block/${value.trim()}`)
-          break
-        case 'pvm_tx':
-          router.push(`/tx/${value.trim()}`)
-          break
-        case 'pvm_contract':
-          router.push(`/contract/${value.trim()}`)
-          break
-        case 'pvm_account':
-          router.push(`/address/${value.trim()}`)
-          break
-        default:
-          break
-      }
+    const redirectPath = getSearchRedirectPath(type[0], value)
+
+    if (redirectPath) {
+      router.push(redirectPath)
       setValue('')
     }
   }
@@ -199,7 +216,9 @@ const Component: React.FC<Props> = ({ children, className }) => {
           <Link href="/" className="text-inherit">
             <div className="flex items-center gap-2 text-white">
               <span className="text-xl font-semibold tracking-normal">{explorerName}</span>
-              <span className="hidden rounded-md border border-white/15 bg-white/10 px-2 py-0.5 text-xs font-medium text-[#AEFEC3] sm:inline">Powered by Subscan Essentials</span>
+              <span className="hidden rounded-md border border-white/15 bg-white/10 px-2 py-0.5 text-xs font-medium text-[#AEFEC3] sm:inline">
+                Powered by Subscan Essentials
+              </span>
             </div>
           </Link>
         </NavbarBrand>
@@ -388,14 +407,7 @@ const Component: React.FC<Props> = ({ children, className }) => {
           )}
           <NavbarItem>
             <div className="rounded-lg border border-white/10 bg-white/10 px-2.5 py-0.5">
-              <Image
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="hidden md:block h-[30px] w-auto"
-                src={networkLogoSrc}
-                alt={networkNode}
-              />
+              <Image width={0} height={0} sizes="100vw" className="hidden md:block h-[30px] w-auto" src={networkLogoSrc} alt={networkNode} />
             </div>
           </NavbarItem>
         </NavbarContent>
@@ -441,11 +453,12 @@ const Component: React.FC<Props> = ({ children, className }) => {
                       selectedIcon: 'text-[#9CF982]',
                     },
                   }}
+                  aria-label="Search type"
                   label=""
-                  selectedKeys={type}
+                  selectedKeys={selectedTypeKeys}
                   onSelectionChange={(key) => {
                     if (key.currentKey) {
-                      setType([key.currentKey])
+                      setType([key.currentKey as SearchType])
                     }
                   }}>
                   {typeOptions.map((item) => (
