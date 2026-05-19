@@ -6,6 +6,7 @@ import {
   formatNumber,
   getBalanceAmount,
   timeAgo,
+  detectSearchType,
 } from '@/utils/text';
 import { BIGNUMBER_FMT } from '@/utils/const';
 
@@ -36,6 +37,47 @@ describe('Utils - text', () => {
       expect(checkIsExtrinsicIndex('-1')).toBe(false);
       expect(checkIsExtrinsicIndex('abc-def')).toBe(false);
       expect(checkIsExtrinsicIndex('')).toBe(false);
+    });
+  });
+
+  describe('detectSearchType', () => {
+    const allSearchTypes = [
+      'sub_block',
+      'sub_extrinsic',
+      'sub_event',
+      'sub_account',
+      'pvm_block',
+      'pvm_tx',
+      'pvm_contract',
+      'pvm_account',
+    ];
+
+    it('should detect 32-byte hashes as Substrate block searches', () => {
+      expect(detectSearchType('0x' + 'a'.repeat(64), 'pvm_account', [...allSearchTypes])).toBe('sub_block');
+    });
+
+    it('should fall back to EVM transaction for 32-byte hashes when Substrate search is unavailable', () => {
+      expect(detectSearchType('0x' + 'a'.repeat(64), 'pvm_account', ['pvm_block', 'pvm_tx', 'pvm_contract', 'pvm_account'])).toBe('pvm_tx');
+    });
+
+    it('should detect Substrate addresses', () => {
+      expect(detectSearchType('5GrwvaEF5zXb26Fz9rcQpDWS2ncsYtX1WV9c7hEAbMX5r6Cv', 'pvm_account', [...allSearchTypes])).toBe('sub_account');
+    });
+
+    it('should keep the selected EVM type for ambiguous EVM addresses', () => {
+      const address = '0x' + 'b'.repeat(40);
+
+      expect(detectSearchType(address, 'pvm_contract', [...allSearchTypes])).toBe('pvm_contract');
+      expect(detectSearchType(address, 'pvm_account', [...allSearchTypes])).toBe('pvm_account');
+    });
+
+    it('should default ambiguous EVM addresses to EVM account when another type is selected', () => {
+      expect(detectSearchType('0x' + 'b'.repeat(40), 'sub_block', [...allSearchTypes])).toBe('pvm_account');
+    });
+
+    it('should detect extrinsic indexes unless event is selected', () => {
+      expect(detectSearchType('12345-1', 'sub_block', [...allSearchTypes])).toBe('sub_extrinsic');
+      expect(detectSearchType('12345-1', 'sub_event', [...allSearchTypes])).toBe('sub_event');
     });
   });
 
