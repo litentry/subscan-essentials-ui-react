@@ -22,6 +22,7 @@ import { useData } from '@/context'
 import Image from 'next/image'
 import _ from 'lodash'
 import { env } from 'next-runtime-env'
+import { detectSearchType, SearchType } from '@/utils/text'
 
 interface Props extends BareProps {
   value: string
@@ -135,31 +136,39 @@ const Component: React.FC<Props> = ({ children, className }) => {
     }
   }
   const handleRedirect = () => {
-    if (value.trim()) {
-      switch (type[0]) {
+    const searchValue = value.trim()
+    if (searchValue) {
+      const searchType = detectSearchType(
+        searchValue,
+        type[0] as SearchType,
+        typeOptions.map((option) => option.value)
+      )
+
+      setType([searchType])
+      switch (searchType) {
         case 'sub_block':
-          router.push(`/sub/block/${value.trim()}`)
+          router.push(`/sub/block/${searchValue}`)
           break
         case 'sub_extrinsic':
-          router.push(`/sub/extrinsic/${value.trim()}`)
+          router.push(`/sub/extrinsic/${searchValue}`)
           break
         case 'sub_event':
-          router.push(`/sub/event/${value.trim()}`)
+          router.push(`/sub/event/${searchValue}`)
           break
         case 'sub_account':
-          router.push(`/sub/account/${value.trim()}`)
+          router.push(`/sub/account/${searchValue}`)
           break
         case 'pvm_block':
-          router.push(`/block/${value.trim()}`)
+          router.push(`/block/${searchValue}`)
           break
         case 'pvm_tx':
-          router.push(`/tx/${value.trim()}`)
+          router.push(`/tx/${searchValue}`)
           break
         case 'pvm_contract':
-          router.push(`/contract/${value.trim()}`)
+          router.push(`/contract/${searchValue}`)
           break
         case 'pvm_account':
-          router.push(`/address/${value.trim()}`)
+          router.push(`/address/${searchValue}`)
           break
         default:
           break
