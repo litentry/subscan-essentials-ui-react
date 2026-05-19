@@ -165,11 +165,16 @@ html body {
   color: #ececec !important;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
   backdrop-filter: blur(16px);
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 .heima-select-popover [data-slot="listbox"],
+.heima-select-popover [data-slot="listboxWrapper"],
 .heima-select-popover [role="listbox"] {
   color: #ececec;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 .heima-select-popover [data-slot="base"] {
@@ -182,6 +187,10 @@ html body {
 
 .heima-select-popover [data-slot="title"] {
   color: #ececec !important;
+  max-width: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
 }
 
 .heima-select-popover [data-slot="base"][data-hover="true"],

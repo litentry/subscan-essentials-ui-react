@@ -7,7 +7,7 @@ export default function Page() {
     <PageContent>
       <Container>
         <div className="flex flex-col gap-4">
-          <div className="">Smart Contract Blocks</div>
+          <div className="">EVM Contract Blocks</div>
           <PVMBlockTable></PVMBlockTable>
         </div>
       </Container>
