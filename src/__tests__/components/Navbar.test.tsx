@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Navbar } from '@/components/navbar'
+import { getSearchRedirectPath } from '@/components/navbar/navbar'
 import { useRouter } from 'next/router'
 import '@testing-library/jest-dom'
 import { DataProvider } from '@/context'
@@ -18,6 +19,8 @@ jest.mock('@/utils/api', () => ({
 }))
 
 describe('Navbar', () => {
+  const evmAccount = '0xdE644936D5B7d5d42032fd08bbA42Fbbfd6663Bc'
+
   const mockRouter = {
     push: jest.fn(),
   }
@@ -34,7 +37,7 @@ describe('Navbar', () => {
   const mockToken = { TST: { price: '100', change: '1' } }
 
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue(mockRouter)
+    ;(useRouter as jest.Mock).mockReturnValue(mockRouter)
     ;(api.useMetadata as jest.Mock).mockReturnValue({ data: { data: mockMetadata } })
     ;(api.useToken as jest.Mock).mockReturnValue({ data: { data: mockToken } })
   })
@@ -47,7 +50,7 @@ describe('Navbar', () => {
     return render(
       <DataProvider>
         <Navbar value="" />
-      </DataProvider>,
+      </DataProvider>
     )
   }
 
@@ -64,5 +67,9 @@ describe('Navbar', () => {
     fireEvent.keyDown(searchInput, { key: 'Enter' })
 
     expect(mockRouter.push).toHaveBeenCalledWith('/sub/block/123456')
+  })
+
+  it('builds an EVM account search route for the requested account', () => {
+    expect(getSearchRedirectPath('pvm_account', evmAccount)).toBe(`/address/${evmAccount}`)
   })
 })
